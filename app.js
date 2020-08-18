@@ -26,7 +26,6 @@ io.on('connection', socket => {
             text: `${user} has joined the chat`,
             timestamp: moment().format('h:mm a'),
         });
-        console.log({ USERS })
         io.emit('users', USERS);
     });
 
@@ -38,6 +37,10 @@ io.on('connection', socket => {
             user: chat.user,
             timestamp: moment().format('h:mm a')
         });
+    });
+
+    socket.on('typing', info => {
+        io.emit('typed', info);
     });
 
     socket.on('disconnect', () => {
@@ -53,8 +56,6 @@ io.on('connection', socket => {
                 timestamp: moment().format('h:mm a'),
             });
         }
-
-        console.log({ USERS })
 
         io.emit('users', USERS);
     });
