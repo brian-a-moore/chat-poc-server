@@ -40,7 +40,7 @@ io.on('connection', socket => {
     });
 
     socket.on('typing', info => {
-        io.emit('typed', info);
+        socket.broadcast.emit('typed', info);
     });
 
     socket.on('disconnect', () => {
